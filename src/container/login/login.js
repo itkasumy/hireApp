@@ -1,10 +1,11 @@
 import React from 'react'
 import { List, InputItem, WingBlank, WhiteSpace, Button } from 'antd-mobile'
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom'
 import {login} from '../../redux/user-redux'
 
 import Logo from '../../components/logo/logo'
+import FiForm from '../../components/fiForm/fiForm'
 
 // @WrapperHello
 // class Hello extends React.Component {
@@ -51,13 +52,14 @@ import Logo from '../../components/logo/logo'
   state => state.user,
   {login}
 )
+@FiForm
 class Login extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      user: '',
-      pwd: ''
-    }
+    // this.state = {
+    //   user: '',
+    //   pwd: ''
+    // }
     this.register = this.register.bind(this)
     this.handleClick = this.handleClick.bind(this)
   }
@@ -66,32 +68,32 @@ class Login extends React.Component {
     this.props.history.push('/register')
   }
 
-  handleChange(key, val) {
-    this.setState({
-      [key]: val
-    })
-  }
+  // handleChange(key, val) {
+  //   this.setState({
+  //     [key]: val
+  //   })
+  // }
   
   handleClick() {
-    this.props.login(this.state)
+    this.props.login(this.props.state)
   }
   
   render() {
     return (<div>
       {/* <Hello></Hello> */}
-      <Hello></Hello>
+      {/* <Hello></Hello> */}
       {this.props.redirectTo && (this.props.redirectTo !== '/login') ? <Redirect to={this.props.redirectTo} /> : null}
       <Logo></Logo>
       <WingBlank>
         {this.props.msg ? <p className="error-msg">{this.props.msg}</p> : null}
         <List>
           <InputItem
-            onChange={v => this.handleChange('user', v)}
+            onChange={v => this.props.handleChange('user', v)}
           >用户:</InputItem>
           <WhiteSpace />
           <InputItem
             type="password"
-            onChange={v => this.handleChange('pwd', v)}
+            onChange={v => this.props.handleChange('pwd', v)}
           >密码:</InputItem>
         </List>
         <WhiteSpace />

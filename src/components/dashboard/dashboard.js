@@ -5,6 +5,7 @@ import { Route, Switch } from 'react-router-dom'
 import NavLinkBar from '../navlink/navlink'
 import Boss from '../boss/boss'
 import Genius from '../genius/genius'
+import User from '../../components/user/user'
 
 @connect(
   state => state,
@@ -43,7 +44,7 @@ class Dashboard extends React.Component {
         text: '我',
         icon: 'user',
         title: '个人中心',
-        component: Me
+        component: User
       }
     ]
     return <div>
@@ -63,10 +64,6 @@ class Dashboard extends React.Component {
 
 function Msg() {
   return <div>Msg</div>
-}
-
-function Me() {
-  return <div>Me</div>
 }
 
 export default Dashboard

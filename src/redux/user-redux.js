@@ -6,6 +6,7 @@ const ERROR_MSG = 'ERROR_MSG'
 // const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 const LOAD_DATA = 'LOAD_DATA'
 const AUTH_SECCESS = 'AUTH_SECCESS'
+const LOGOUT = 'LOGOUT'
 
 const initState = {
   redirectTo: '',
@@ -26,6 +27,8 @@ export function user(state=initState, action) {
       return {...state, msg: '', redirectTo: getRedirectPath(action.payload),  ...action.payload}
     case LOAD_DATA:
       return {...state, ...action.payload }
+    case LOGOUT:
+      return { ...initState, redirectTo: '/login'}
     case ERROR_MSG:
       return {...state, isAuth: false, msg: action.msg}
     default:
@@ -52,6 +55,12 @@ function authSuccess(obj) {
 
 export function loadData(data) {
   return {type: LOAD_DATA, payload: data}
+}
+
+export function logoutSubmit() {
+  console.log(666666);
+  
+  return {type: LOGOUT}
 }
 
 export function login({ user, pwd }) {

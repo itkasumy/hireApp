@@ -30,7 +30,7 @@ class Login extends React.Component {
 
   handleRegist() {
     this.props.regist(this.state)
-    console.log(this.state)
+    // console.log(this.state)
   }
   
   render() {

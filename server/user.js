@@ -63,6 +63,21 @@ Router.get('/info', (req, res) => {
   })
 })
 
+Router.post('/update', (req, res) => {
+  const { userid } = req.cookies
+  if (!userid) {
+    return res.json({ code: 1 })
+  }
+  const body = req.body
+  return User.findByIdAndUpdate(userid, body, (err, doc) => {
+    if (err) {
+      return res.json({code: 1, msg: '后台错误'})
+    }
+    const data = Object.assign({}, {user: doc.user, type: doc.type}, body)
+    return res.json({code: 0, data})
+  })
+})
+
 function md5Pwd(pwd) {
   const solt = '%El4Y*lg8E&fKG92@7_UYxm#lXH6^Fi12Ks!'
   return utility.md5(utility.md5(pwd+solt+pwd))

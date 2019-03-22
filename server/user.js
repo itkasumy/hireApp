@@ -6,7 +6,8 @@ const User = model.getModel('user')
 const _filter = {pwd: 0, __v: 0}
 
 Router.get('/list', (req, res) => {
-  User.find({}, (err, doc) => res.json(doc))
+  const { type } = req.query
+  User.find({ type }, (err, doc) => res.json({ code: 0, data: doc}))
   // User.remove({}, (err, doc) => err ? console.log(err) : console.log(doc))
 })
 

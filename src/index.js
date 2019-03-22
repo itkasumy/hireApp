@@ -10,6 +10,7 @@ import Register from './container/register/register'
 import AuthRoute from './components/authroute/authroute'
 import BossInfo from './container/bossInfo/bossInfo'
 import GeniusInfo from './container/geniusInfo/geniusInfo'
+import Dashboard from './components/dashboard/dashboard'
 
 import reducer from './reducer';
 import './config'
@@ -22,10 +23,6 @@ const store = createStore(reducer, compose(
   chromeReduxDevtools()
 ))
 
-function Dashboard() {
-  return <h2>hhhh</h2>
-}
-
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
@@ -35,7 +32,7 @@ ReactDOM.render(
           <Route path="/bossinfo" component={BossInfo} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
-          <Route component={Dashboard} />
+        <Route component={Dashboard} />
         </Switch>
     </BrowserRouter>
   </Provider>,

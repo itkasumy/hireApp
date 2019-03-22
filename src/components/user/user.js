@@ -1,12 +1,32 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Result, List, WhiteSpace } from 'antd-mobile'
+import { Result, List, WhiteSpace, Modal } from 'antd-mobile'
+import browserCookie from 'browser-cookies'
 
 @connect(
   state => state.user,
   {}
 )
 class User extends React.Component {
+  constructor(props) {
+    super(props)
+    this.logout = this.logout.bind(this)
+  }
+
+  logout() {
+    console.log(111)
+    
+    const alert = Modal.alert
+    alert('注销', '是否确认注销???', [
+      { text: '取消', onPress: () => console.log('cancel'), style: 'default' },
+      { text: '确认', onPress: () => {
+        browserCookie.erase('userid')
+        // window.location = 
+      }}
+    ])
+    
+  }
+  
   render() {
     const props = this.props
     const Item = List.Item
@@ -26,7 +46,9 @@ class User extends React.Component {
       </List>
       <WhiteSpace></WhiteSpace>
       <List>
-        <Item>退出登录</Item>
+        <Item
+          onClick={this.logout}
+        >退出登录</Item>
       </List>
     </div>) : null
   }

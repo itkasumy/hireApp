@@ -4,6 +4,7 @@ import { NavBar } from 'antd-mobile'
 import { Route, Switch } from 'react-router-dom'
 import NavLinkBar from '../navlink/navlink'
 import Boss from '../boss/boss'
+import Genius from '../genius/genius'
 
 @connect(
   state => state,
@@ -20,7 +21,7 @@ class Dashboard extends React.Component {
         icon: 'boss',
         title: '牛人列表',
         component: Boss,
-        hide: user.type !== 'genius'
+        hide: user.type === 'genius'
       },
       {
         path: '/genius',
@@ -28,7 +29,7 @@ class Dashboard extends React.Component {
         icon: 'job',
         title: 'BOSS列表',
         component: Genius,
-        hide: user.type !== 'boss'
+        hide: user.type === 'boss'
       },
       {
         path: '/msg',
@@ -58,10 +59,6 @@ class Dashboard extends React.Component {
       <NavLinkBar data={navList}></NavLinkBar>
     </div>
   }
-}
-
-function Genius() {
-  return <div>Genius</div>
 }
 
 function Msg() {

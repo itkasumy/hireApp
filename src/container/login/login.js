@@ -6,6 +6,47 @@ import {login} from '../../redux/user-redux'
 
 import Logo from '../../components/logo/logo'
 
+// @WrapperHello
+// class Hello extends React.Component {
+//   render() {
+//     return <p>Hello React</p>
+//   }
+// }
+
+// // function WrapperHello(Comp) {
+// //   class WrapperComp extends React.Component {
+// //     render() {
+// //       return (
+// //         <div>
+// //           <h2>这是HOC高阶组件特有的元素の属性代理</h2>
+// //           <Comp name="ksm" {...this.props}></Comp>
+// //         </div>
+// //       )
+// //     }
+// //   }
+// //   return WrapperComp
+// // }
+
+// function WrapperHello(Comp) {
+//   class WrapperComp extends Comp {
+//     componentDidMount() {
+//       console.log('这是HOC高阶组件特有的元素の修改生命周期-反向继承')
+//     }
+    
+//     render() { 
+//       return (
+//         <div>
+//           <h2>这是HOC高阶组件特有的元素の修改生命周期-反向继承</h2>
+//           <Comp></Comp>
+//         </div>
+//       )
+//     }
+//   }
+//   return WrapperComp
+// }
+
+// // Hello = WrapperHello(Hello)
+
 @connect(
   state => state.user,
   {login}
@@ -37,6 +78,8 @@ class Login extends React.Component {
   
   render() {
     return (<div>
+      {/* <Hello></Hello> */}
+      <Hello></Hello>
       {this.props.redirectTo && (this.props.redirectTo !== '/login') ? <Redirect to={this.props.redirectTo} /> : null}
       <Logo></Logo>
       <WingBlank>

@@ -3,6 +3,7 @@ import React from 'react'
 import { List, InputItem, NavBar, Icon, Grid } from 'antd-mobile'
 import { connect } from 'react-redux'
 import { getMsgList, sendMsg, recvMsg } from '../../redux/chat-redux'
+import { getChatId } from '../../util'
 
 // const socket = io('ws://localhost:8080')
 
@@ -55,6 +56,8 @@ class Chat extends React.Component {
       return null
     }
     const emoji = '😀 😃 😄 😁 😆 😅 🤣 😂 🙂 🙃 😉 😊 😇 😍 🤩 😘 😗 😚 😙 😋 😛 😜 🤪 😝 🤑 🤗 🤭 🤫 🤔 🤐 🤨 😐 😑 😶 😏 😒 🙄 😬 🤥 😌 😔 😪 🤤 😴 😷 🤒 🤕 🤢 🤮 🤧 😵 🤯 🤠 😎 🤓 🧐 😕 😟 🙁 😮 😯 😲 😳 😦 😧 😨 😰 😥 😢 😭 😱 😖 😣 😞 😓 😩 😫 😤 😡 😠 🤬 😈 👿 💀 💩 🤡 👹 👺 👻 👽 👾 🤖 😺 😸 😹 😻 😼 😽 🙀 😿 😾 💋 👋 🤚 🖐 🖖 👌 🤞 🤟 🤘 🤙 👈 👉 👆 🖕 👇 👍 👎 👊 🤛 🤜 👏 🙌 👐 🤲 🤝 🙏 💅 🤳 💪 👂 👃 🧠 👀 👁 👅 👄 👶 🧒 👦 👧 🧑 👱 👨 🧔 👩 🧓 👴 👵 🙍 🙎 🙅 🙆 🙋 🙇 🤦 👨‍🎓 👩‍ 👕 👖 🧣 🧤 🧥 🧦 👗 👘 👙 👚 👛 👜 👝 🎒 👞 👟 👠 👡 👢 👑 👒 🎩 🎓 🧢 ⛑ 💄 💍 💼'.split(' ').filter(v => v).map(v => ({ text: v }))
+    const chatid = getChatId(userid, this.props.user._id)
+    const chatmsgs = this.props.chat.chatmsg.filter(v => v.chatid === chatid)
 
     return (
       <div id="chat-page">
@@ -62,8 +65,7 @@ class Chat extends React.Component {
           icon={<Icon type="left" />}
           onLeftClick={() => {this.props.history.goBack()}}
         >{users[userid].name}</NavBar>
-        {this.props.chat.chatmsg.map(v => {
-          console.log(users,v, users[v.from].avatar)
+        {chatmsgs.map(v => {
           const avatar = require(`../img/${users[v.from].avatar}.png`)
           return v.from === userid ? (
             <List key={v._id}>

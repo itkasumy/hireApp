@@ -5,8 +5,9 @@ import { Route, Switch } from 'react-router-dom'
 import NavLinkBar from '../navlink/navlink'
 import Boss from '../boss/boss'
 import Genius from '../genius/genius'
-import User from '../../components/user/user'
-import { getMsgList, recvMsg } from '../../redux/chat-redux';
+import User from '../user/user'
+import { getMsgList, recvMsg } from '../../redux/chat-redux'
+import Msg from '../msg/msg'
 
 @connect(
   state => state,
@@ -68,10 +69,6 @@ class Dashboard extends React.Component {
       </div>
     </div>
   }
-}
-
-function Msg() {
-  return <div>Msg</div>
 }
 
 export default Dashboard

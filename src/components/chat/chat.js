@@ -58,14 +58,14 @@ class Chat extends React.Component {
           return v.from === userid ? (
             <List key={v._id}>
               <Item
-                extra={<img src={avatar} alt="" />}
+                thumb={avatar}
                 >{v.content}</Item>
             </List>
           ) : (
             <List key={v._id}>
               <Item
                 className="chat-me"
-                thu mb={avatar}
+                extra={<img src={avatar} alt="" />}
               >{v.content}</Item>
             </List>
           )

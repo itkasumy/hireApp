@@ -14,8 +14,18 @@ app.use(cookieParser())
 app.use(bodyParser.json())
 app.use('/user', userRouter)
 
+const model = require('./model')
+const Chat = model.getModel('chat')
 io.on('connection', socket => {
-  console.log('user login')
+  socket.on('sendmsg', (data) => {
+    const {from, to, msg} = data
+    const chatid = [from, to].sort().join('_')
+    Chat.create({chatid, from, to, content: msg}, (err, d) => {
+      io.emit('recvmsg', Object.assign({}, d._doc))
+    })
+    // io.emit('recvmsg', data)
+    // return res.json({code: 0})
+  })
 })
 
 // mongoose.connection.on('connected', () => {

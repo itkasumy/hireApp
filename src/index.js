@@ -18,10 +18,10 @@ import './config'
 import './index.css'
 
 const chromeReduxDevtools = window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__ : () => { }
-
+console.log(chromeReduxDevtools)
 const store = createStore(reducer, compose(
   applyMiddleware(thunk),
-  chromeReduxDevtools()
+  // chromeReduxDevtools()
 ))
 
 ReactDOM.render(

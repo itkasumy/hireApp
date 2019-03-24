@@ -7,9 +7,16 @@ const port = 8080
 
 const app = express()
 
+const server = require('http').Server(app)
+const io = require('socket.io')(server)
+
 app.use(cookieParser())
 app.use(bodyParser.json())
 app.use('/user', userRouter)
+
+io.on('connection', socket => {
+  console.log('user login')
+})
 
 // mongoose.connection.on('connected', () => {
 //   console.log('mongo connect success')
@@ -32,4 +39,4 @@ app.use('/user', userRouter)
 //   err ? console.log(err) : console.log(doc)
 // })
 
-app.listen(port, () => console.log(`NodeJS run on port ${port}`))
+server.listen(port, () => console.log(`NodeJS run on port ${port}`))

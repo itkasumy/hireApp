@@ -97,6 +97,17 @@ Router.get('/msglist', (req, res) => {
   })
 })
 
+Router.post('/readmsg', (req, res) => {
+  const userid = req.cookies.userid
+  const { from } = req.body
+  Chat.update({from, to: userid}, {$set: {read: true}}, {multi: true}, (err, doc) => {
+    if (!err) {
+      return res.json({ code: 0, num: doc.nModified})
+    }
+    return res.json({code: 1, msg: '修改失败'})
+  })
+})
+
 function md5Pwd(pwd) {
   const solt = '%El4Y*lg8E&fKG92@7_UYxm#lXH6^Fi12Ks!'
   return utility.md5(utility.md5(pwd+solt+pwd))
